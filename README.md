@@ -2,11 +2,11 @@
 
 
 
-\## Files Description
+## Files Description
 
 
 
-python files:
+### python files:
 
 'main.py' - Main file.
 
@@ -16,7 +16,7 @@ python files:
 
 
 
-results files:
+### results files:
 
 'id\_states.json' - Persistence file for saving information about IDs of related to results.
 
@@ -26,7 +26,7 @@ results files:
 
 
 
-\## How to use:
+## How to use:
 
 Run the main.py file in CMD\\some file editor.
 
