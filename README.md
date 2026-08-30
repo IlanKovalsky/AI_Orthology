@@ -18,7 +18,7 @@
 
 ### results files:
 
-'id\_states.json' - Persistence file for saving information about IDs of related to results.
+'id\_states.json' - Persistence file for saving information about IDs related to results.
 
 'simulation\_results.csv' - Table that saves the direct results of the simulation.
 
