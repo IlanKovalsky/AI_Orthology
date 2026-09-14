@@ -24,7 +24,9 @@
 
 'tree\_i.tree' - Files that save the structure of simulated tree in Newick format.
 
+'positive\_pairs\_results.csv' - Positive pairs of genes from simulations
 
+'negative\_pairs\_results.csv' - Negative pairs of genes from simulations
 
 ## How to use:
 
@@ -32,7 +34,7 @@ Run the main.py file in CMD\\some file editor.
 
 How To change arguments of the simulation:
 
-CMD - Add after main.py argument that you want to change (--n number of leaves, --m number of COGs, --l length of gene, --mean mean edge length) and number that you want to use. For example: 'main.py --n 1500' will change number of leaves to 1500.
+CMD - Add after main.py argument that you want to change (--n number of leaves, --m number of COGs, --l length of gene, --mean mean edge length, --neg set to true if you want to store the negative pairs) and number that you want to use. For example: 'main.py --n 1500' will change number of leaves to 1500.
 
 If you want to change it directly in code then in main.py at function 'get\_arguments' change the default value of arguments as you need.
 

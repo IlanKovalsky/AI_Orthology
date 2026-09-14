@@ -45,11 +45,12 @@ class TreeNode:
         return leaves
 
 class Genome:
-    def __init__(self, genes:list[str] |None = None):
+    def __init__(self, genes:list[str] |None = None, gene_id: int = -1):
         if genes is None:
             self.genes: list[str] = []
         else:
             self.genes = genes
+        self.start_gene_id = gene_id
 
 
     @staticmethod
@@ -78,23 +79,22 @@ class Genome:
         """ Mutates gene based on Jukes Cantor mutation process\n
                 input: gene - string of the gene, p - probability of mutation of  each letter\n
                 output:  string of gene after mutation """
-        mutation: str = ""
+        mutation = []
         for letter in gene:
             if random.random() < p:
                 alphabet: str = replacement[letter]
-                index:int = random.randint(0,len(alphabet) - 1)
-                mutation += alphabet[index]
+                mutation.append(random.choice(alphabet))
             else:
-                mutation += letter
-        return mutation
+                mutation.append(letter)
+        return ''.join(mutation)
 
 
-    def mutate_jukes_cantor(self, p: float = 0):
+    def mutate_jukes_cantor(self, genes: list[str],  p: float = 0):
         """ Mutates all genes of genome based on Jukes Cantor mutation process\n
-                input: p - probability of mutation of  each letter\n
+                input: genes of parent, p - probability of mutation of  each letter\n
                 output: none """
-        for i in range(len(self.genes)):
-            self.genes[i] = Genome.mutate_gene_jukes_cantor(self.genes[i], p)
+        for gene in genes:
+            self.genes.append(Genome.mutate_gene_jukes_cantor(gene, p))
 
 
     def __str__(self): #for debugging
@@ -106,11 +106,13 @@ class Genome:
 
 class EvolutionTree:
     def __init__(self, root: TreeNode,n: int = 0, tree_id: int = -1, ancestor_id: int = -1,
-                 cog_id = -1,):
+                 cog_id = -1, gene_id: int = -1, genome_id: int = -1):
         self.root: TreeNode = root
         self.tree_id: int = tree_id
         self.ancestor_id: int = ancestor_id
-        self.cog_id = cog_id
+        self.first_cog_id = cog_id
+        self.first_gene_id = gene_id
+        self.first_genome_id = genome_id
         self.dist = [[0.0] * n for i in range(n)] #distance matrix
 
 
@@ -136,8 +138,8 @@ class EvolutionTree:
                 output: none"""
         if current is None:
             return
-        current.val.genes = parent.val.genes.copy()
-        current.val.mutate_jukes_cantor(EvolutionTree.get_probability_from_length_jukes_cantor(current.edge_length))
+        current.val.mutate_jukes_cantor(parent.val.genes,
+                                        EvolutionTree.get_probability_from_length_jukes_cantor(current.edge_length))
         EvolutionTree.mutate_tree_jukes_cantor_static(current.left, current)
         EvolutionTree.mutate_tree_jukes_cantor_static(current.right, current)
 

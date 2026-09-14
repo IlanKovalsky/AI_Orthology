@@ -1,5 +1,7 @@
 ID_STATES_PATH = "id_states.json"
 SIMULATION_RESULTS_PATH = "simulation_results.csv"
+POSITIVE_PAIRS_RESULTS_PATH = "positive_pairs_results.csv"
+NEGATIVE_PAIRS_RESULTS_PATH = "negative_pairs_results.csv"
 
 
 def is_file_exists(path: str) -> bool:
@@ -66,9 +68,9 @@ def init_simulation_results():
                    ",random_seed,ancestor_sequence\n")
 
 
-def append_simulation_result(result: str, file):
-    """ Appends simulation result to simulation results file \n
-        input: result\n
+def init_pairs_results(path: str):
+    """ Initializes pairs results file\n
+        input: path of the file \n
         output: none"""
-    #with open(SIMULATION_RESULTS_PATH, "a") as file:
-    file.write(result + "\n")
+    with open(path, "wt") as file:
+        file.write("gene1,gene2,COG1,COG2,label,tree distance,genome1,genome2\n")
