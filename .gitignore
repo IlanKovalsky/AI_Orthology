@@ -216,3 +216,7 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+negative_pairs_results.csv
+positive_pairs_results.csv
+simulation_results.csv
